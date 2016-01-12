@@ -1,5 +1,6 @@
 var express = require('express'),
-    helloController = require('./controllers/helloHelper');
+    helloController = require('./controllers/helloHelper'),
+    usersController = require('./controllers/userHelper');
 
 var port = process.env.PORT || 8000;
 
@@ -14,16 +15,16 @@ app.get('/', function (req, res) {
 });
 
 router.route('/hello')
-    .get(helloController.displayHello)
+    .get(helloController.displayHello);
+
+router.route('/users')
+    .get(usersController.getAllUsers);
 
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
-
-
-
 
 app.listen(port, function () {
     console.log("Gulp is running on port: " + port);
