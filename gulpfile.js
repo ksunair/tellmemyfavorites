@@ -1,3 +1,16 @@
-/**
- * Created by unni on 1/11/2016.
- */
+var gulp = require('gulp'),
+    nodemon = require('gulp-nodemon');
+
+gulp.task('default', function () {
+    nodemon({
+        script: 'app.js',
+        ext: 'js',
+        env: {
+            PORT: 8000
+        },
+        ignore: ['./node_nodules/**']
+    })
+        .on('restart', function () {
+            console.log('Restarting..');
+        })
+});
